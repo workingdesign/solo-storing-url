@@ -152,7 +152,7 @@ if ( 'posts' == get_option( 'show_on_front' ) && $responsive_options['front_page
 
 					</div>
 
-					<!-- <div class="thumbnail-event"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_post_thumbnail('thumbnail'); ?></a></div> -->
+					<!-- <div class="thumbnail-event"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_post_thumbnail(//'thumbnail'); ?></a></div> -->
 
 				    <div class="clear"></div>
 
