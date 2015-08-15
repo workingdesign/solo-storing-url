@@ -115,7 +115,7 @@ if ( 'posts' == get_option( 'show_on_front' ) && $responsive_options['front_page
 	        		'posts_per_page' => 1,
 		        );
 
-		        //query reset at the bottom
+		        //query reset at the bottom, anyway after the endwhile;
 
 				 $loop = new WP_Query( $args );
 				   while ( $loop->have_posts() ) : $loop->the_post();?>
