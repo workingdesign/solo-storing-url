@@ -139,6 +139,7 @@ if ( 'posts' == get_option( 'show_on_front' ) && $responsive_options['front_page
 					    	?>
 					    	<br />
 					    	<?php echo get_post_meta($post->ID, 'show_venue', true); ?>
+					    	<?php echo get_post_meta($post->ID, 'show_time', true); ?>
 					    	<br />
 					    	<a href="<?php get_post_meta($post->ID, 'show_url', true); ?>" target="_blank">
 					    		<?php echo get_post_meta($post->ID, 'show_url', true); ?>

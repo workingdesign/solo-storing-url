@@ -5,35 +5,35 @@
 add_action('init', 'soul_create_shows');
 function soul_create_shows() {
 
-	$labels = array(
-		'name' => _x('SHOWS', 'post type general name'),
-		'singular_name' => _x('show', 'post type singular name'),
-		'add_new' => _x('Add New', 'show'),
-		'add_new_item' => __('Add New show'),
-		'edit_item' => __('Edit show'),
-		'new_item' => __('New show'),
-		'view_item' => __('View show'),
-		'search_items' => __('Search shows'),
-		'not_found' =>  __('Nothing found'),
-		'not_found_in_trash' => __('Nothing found in Trash'),
-		'parent_item_colon' => ''
-	);
+    $labels = array(
+        'name' => _x('SHOWS', 'post type general name'),
+        'singular_name' => _x('show', 'post type singular name'),
+        'add_new' => _x('Add New', 'show'),
+        'add_new_item' => __('Add New show'),
+        'edit_item' => __('Edit show'),
+        'new_item' => __('New show'),
+        'view_item' => __('View show'),
+        'search_items' => __('Search shows'),
+        'not_found' =>  __('Nothing found'),
+        'not_found_in_trash' => __('Nothing found in Trash'),
+        'parent_item_colon' => ''
+    );
 
-	$args = array(
-		'labels' => $labels,
-		'public' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true,
-		'query_var' => true,
-		'rewrite' => true,
-		'capability_type' => 'post',
-		'hierarchical' => false,
-		'menu_position' => null,
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'query_var' => true,
+        'rewrite' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'menu_position' => null,
         'menu_icon' => 'dashicons-editor-video',
-		'supports' => array('title','editor','excerpt','thumbnail')
-	  );
+        'supports' => array('title','editor','excerpt','thumbnail')
+      );
 
-	register_post_type( 'shows' , $args );
+    register_post_type( 'shows' , $args );
 }
 
 // Add show type taxonomy for sticky option
@@ -104,11 +104,15 @@ function soul_shows_custom_columns($column){
             echo $custom["show_start_date"][0];
             break;
 
+    case "show_time":
+            echo $custom["show_time"][0];
+            break;
+
     case "show_venue":
             echo $custom["show_venue"][0];
             break;
 
-	case "show_url":
+    case "show_url":
             echo $custom["show_url"][0];
             break;
 
@@ -176,15 +180,16 @@ function soul_show_details_meta() {
     //         <br /> &lt;a href="http://www.my-site.com/" target"_blank"&gt;My Site Title&lt;/a&gt;
     //     </p>';
 
-	$ret = '<p><label>Author: </label><input type="text" size="70" name="show_author" value="' . soul_get_show_field("show_author") . '" /></p>';
-	$ret = $ret . '<p><label>Start Date: </label><input type="text" size="30" name="show_start_date" value="' . soul_get_show_field("show_start_date") . '" /></p>';
+    $ret = '<p><label>Author: </label><input type="text" size="70" name="show_author" value="' . soul_get_show_field("show_author") . '" /></p>';
+    $ret = $ret . '<p><label>Start Date: </label><input type="text" size="30" name="show_start_date" value="' . soul_get_show_field("show_start_date") . '" /></p>';
     $ret = $ret . '<p><label>End Date: </label><input type="text" name="show_date" value="' . soul_format_date(soul_get_show_field("show_date")) . '" /><em> (mm/dd/yyyy)</em></p>';
+    $ret = $ret . '<p><label>Show Time: </label><input type="text" size="30" name="show_time" value="' . soul_get_show_field("show_time") . '" /></p>';
     $ret = $ret . '<p><label>Venue: </label><input type="text" size="70" name="show_venue" value="' . soul_get_show_field("show_venue") . '" /></p>';
 
     echo "<br>";
 
 // GRC test for custom field in the post
-    $ret = $ret . '<p><label>Url [<em>starts with <b>http://</b></em>]: </label><input type="url" size="70" name="show_url" value="' . soul_get_show_field("show_url") . '" /><em> http://your-site.com</em></p>';    
+    $ret = $ret . '<p><label>Url [<em>starts with <b>http://...</b></em>]: </label><input type="url" size="70" name="show_url" value="' . soul_get_show_field("show_url") . '" /><em> http://your-site.com</em></p>';    
     $ret = $ret . '<p><label>Phone Number: </label><input type="text" size="30" name="show_tel" value="' . soul_get_show_field("show_tel") . '" /></p>';
     $ret = $ret . '<p><label>Ticket Price: </label><input type="text" size="100" name="show_price" value="' . soul_get_show_field("show_price") . '" /></p>';
     $ret = $ret . '<p><label>Featuring: </label><input type="text" size="120" name="show_featuring" value="' . soul_get_show_field("show_featuring") . '" /></p>';
@@ -192,7 +197,7 @@ function soul_show_details_meta() {
     // $ret = $ret . '<p><label>Featuring: </label><input type="text" size="120" name="show_featuring" value="' . soul_get_show_field("show_featuring") . '" /></p>';
     // $ret = $ret . '<p><label>Featuring: </label><textarea rows="4" cols="50" name="show_featuring" value="' . soul_get_show_field("show_featuring") . '" ></textarea></p>';
 
-	echo $ret;
+    echo $ret;
 }
 
 function soul_get_show_field($show_field) {
@@ -224,6 +229,7 @@ function soul_save_show_details(){
    soul_save_show_field("show_author");
    soul_save_show_field("show_venue");
    soul_save_show_field("show_start_date"); //grc 03/2015
+   soul_save_show_field("show_time");
    soul_save_show_field("show_url");
    soul_save_show_field("show_tel");
    soul_save_show_field("show_price");
@@ -252,4 +258,3 @@ function soul_get_show_details($include_register_button, $include_title) {
 
     return $ret;
 }
-
